@@ -99,21 +99,27 @@ const Statistics = ({goodValue, neutralValue, badValue, totalValue, averageValue
   }
   return (
     <div>
-      <StatisticLine text="good" value={goodValue}></StatisticLine>
-      <StatisticLine text="neutral" value={neutralValue}></StatisticLine>
-      <StatisticLine text="bad" value={badValue}></StatisticLine>
-      <StatisticLine text="total" value={totalValue}></StatisticLine>
-      <StatisticLine text="average" value={averageValue}></StatisticLine>
-      <StatisticLine text="positive" value={positiveValue}></StatisticLine>
+      <table>
+        <tbody>
+          <StatisticLine text="good" value={goodValue}></StatisticLine>
+          <StatisticLine text="neutral" value={neutralValue}></StatisticLine>
+          <StatisticLine text="bad" value={badValue}></StatisticLine>
+          <StatisticLine text="total" value={totalValue}></StatisticLine>
+          <StatisticLine text="average" value={averageValue}></StatisticLine>
+          <StatisticLine text="positive" value={positiveValue}></StatisticLine>
+        </tbody>
+      </table>
     </div>
   )
 }
 
+// Note: each statistic line is a table row
 const StatisticLine = ({text, value}) => {
   return (
-    <div>
-      {text} {value}
-    </div>
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
   )
 } 
   
