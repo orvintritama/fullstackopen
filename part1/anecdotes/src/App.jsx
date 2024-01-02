@@ -14,6 +14,7 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [points, setPoint] = useState(new Array(8).fill(0))
+  const [mostVotedAnecdote, setMostVotedAnecdote] = useState(0)
 
   const handleNextClick = () => {
     const nextRandomAnecdote = getRandomNumber();
@@ -21,19 +22,28 @@ const App = () => {
   }
 
   const handleVote = () => {
-    const copy = [...points]
-    copy[selected] += 1
-    setPoint(copy)
+    // handle increasing vote by 1 on the selected anecdote
+    const copy = [...points];
+    copy[selected] += 1;
+    setPoint(copy);
+    
+    // handle finding the highest voted anecdote
+    const mostVoted = getHighestVote(copy);
+    setMostVotedAnecdote(mostVoted);
   }
-
 
   return (
     <div>
+      <Header text="Anecdote of the day"></Header>
+
       {anecdotes[selected]} 
       <br></br>
       has votes {points[selected]}
-      <Button handleClick={handleNextClick} text="next anecdote"></Button>
       <Button handleClick={handleVote} text="vote"></Button>
+      <Button handleClick={handleNextClick} text="next anecdote"></Button>
+
+      <Header text="Anecdote with most votes"></Header>
+      {anecdotes[mostVotedAnecdote]}
     </div>
   )
 }
@@ -47,5 +57,15 @@ const Button = ({handleClick, text}) => {
 }
 
 const getRandomNumber = () => Math.floor(Math.random() * 8);
+
+const Header = ({text}) => {
+  return (
+    <div>
+      <h1>{text}</h1>
+    </div>
+  )
+}
+
+const getHighestVote = (array) => array.indexOf(Math.max(...array))
 
 export default App
